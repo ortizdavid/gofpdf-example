@@ -14,13 +14,13 @@ func GenerateTablePdf() {
 	// Columns --------------------
 	pdfGen.TableColumns("Column 1", "Column 2", "Column 3")
 	// Rows -----------------------
-	pdfGen.TableRow("Val1")
-	pdfGen.TableRow("Val1")
-	pdfGen.TableRow("Val1")
+	pdfGen.TableRow("Row1")
+	pdfGen.TableRow("Row1")
+	pdfGen.TableRow("Row1")
 	pdfGen.Fpdf.Ln(5)
-	pdfGen.TableRow("Val2")
-	pdfGen.TableRow("Val2")
-	pdfGen.TableRow("Val2")
+	pdfGen.TableRow("Row2")
+	pdfGen.TableRow("Row2")
+	pdfGen.TableRow("Row2")
 	pdfGen.Fpdf.Ln(5)
 	// Footer ----------------------
 	pdfGen.Footer()

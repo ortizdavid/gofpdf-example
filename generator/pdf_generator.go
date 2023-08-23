@@ -123,7 +123,7 @@ func (gen *PdfGenerator) Header() {
 	pdf.AddPage()
 	pdf.SetFont(s.Font, s.HeaderStyleStr, s.HeaderFontSize)
 	if s.LogoImage != "" {
-		pdf.Image(s.LogoImage, s.LogoX, s.LogoY, s.LogoWidth, s.LogoHeight, 
+		pdf.Image(gen.LogoImage, s.LogoX, s.LogoY, s.LogoWidth, s.LogoHeight, 
 		s.LogoFlow, s.LogoTp, s.LogoLink, s.LogoLinkStr)
 	}
 	pdf.Cell(s.HeaderWidth, s.HeaderHeight, "Report")
