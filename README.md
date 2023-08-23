@@ -1,19 +1,20 @@
 # Examples of PDF Generation
 
 ## Status
-- Completed
+[x] Completed
 
 ## Library
 - [gofpdf](https://github.com/go-pdf/fpdf)
 
 
 ## Examples
-- Simple Pdf Text
-- Simple Table (with: Rows and Cols)
-- Web Report (Ex. Product List)
+[x] Simple Pdf Text
+[x] Simple Table (with: Rows and Cols)
+[x] Web Report (Ex. Product List)
 
 ## Characteristics
 - Compatible with original gofpdf lib
+- Simple and reusable code
 
 ## Instalation
 
