@@ -5,5 +5,7 @@ import "github.com/ortizdavid/gofpdf-example/examples"
 func main() {
 
 	examples.GenerateSimplePdf()
-	examples.GenerateReport()
+	examples.GenerateTablePdf()
+	examples.GenerateWebPdf()
+	
 }

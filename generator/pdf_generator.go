@@ -54,9 +54,19 @@ type PdfGenerator struct {
 	FooterY				float64
 	FooterWidth			float64
 	FooterHeight		float64
+
+	Fpdf  			*fpdf.Fpdf
 }
 
-func (gen *PdfGenerator) NewFPdf() *fpdf.Fpdf {
+
+func NewPdfGenerator() PdfGenerator {
+	return PdfGenerator{
+		Fpdf: newFPdf(),
+	}
+}
+
+
+func newFPdf() *fpdf.Fpdf {
 	return fpdf.New("P", "mm", "A4", "")
 }
 
@@ -101,12 +111,14 @@ func (gen *PdfGenerator) GetPdfStyle() PdfGenerator {
 		FooterY:          -15,
 		FooterWidth:      0,
 		FooterHeight:     10,
+		Fpdf:			  newFPdf(),			
 	}
 }
 
 
 //pdf.Image("static/images/logo.png", 90, 5, 30, 20, false, "", 0, "")
-func (gen *PdfGenerator) Header(pdf *fpdf.Fpdf) {
+func (gen *PdfGenerator) Header() {
+	pdf := gen.Fpdf
 	s := gen.GetPdfStyle()
 	pdf.AddPage()
 	pdf.SetFont(s.Font, s.HeaderStyleStr, s.HeaderFontSize)
@@ -118,14 +130,16 @@ func (gen *PdfGenerator) Header(pdf *fpdf.Fpdf) {
 	pdf.Ln(s.HeaderLn)
 }
 
-func (gen *PdfGenerator) Title(pdf *fpdf.Fpdf, title string) {
+func (gen *PdfGenerator) Title(title string) {
+	pdf := gen.Fpdf
 	s := gen.GetPdfStyle()
 	pdf.SetFont(s.Font, s.TitleStyleStr, s.TitleFontSize)
 	pdf.Cell(s.TitleWidth, s.TitleHeight, title)
 	pdf.Ln(s.TitleLn)
 }
 
-func (gen *PdfGenerator) Footer(pdf *fpdf.Fpdf) {
+func (gen *PdfGenerator) Footer() {
+	pdf := gen.Fpdf
 	s := gen.GetPdfStyle()
 	pdf.SetFooterFunc(func() {
         pdf.SetY(s.FooterY)
@@ -134,14 +148,16 @@ func (gen *PdfGenerator) Footer(pdf *fpdf.Fpdf) {
     })
 }
 
-func (gen *PdfGenerator) BodyCell(pdf *fpdf.Fpdf, row any) {
+func (gen *PdfGenerator) BodyCell(row any) {
+	pdf := gen.Fpdf
 	s := gen.GetPdfStyle()
 	pdf.SetFont(s.Font, s.BodyCellStyleStr, s.BodyCellFontSize)
 	pdf.Cell(s.BodyCellWidth, s.BodyCellHeight, fmt.Sprintf("%v", fmt.Sprintf("%v", row)))
 	pdf.Ln(s.BodyCellLn)
 }
 
-func (gen *PdfGenerator) TableColumns(pdf *fpdf.Fpdf, columns ...string) {
+func (gen *PdfGenerator) TableColumns(columns ...string) {
+	pdf := gen.Fpdf
 	s := gen.GetPdfStyle()
 	pdf.SetFont(s.Font, s.TableColStyleStr, s.TableColFontSize)
 	for _, column := range columns {
@@ -150,21 +166,21 @@ func (gen *PdfGenerator) TableColumns(pdf *fpdf.Fpdf, columns ...string) {
 	pdf.Ln(s.TableLn)
 }
 
-func (gen *PdfGenerator) TableRow(pdf *fpdf.Fpdf, row any) {
+func (gen *PdfGenerator) TableRow(row any) {
+	pdf := gen.Fpdf
 	s := gen.GetPdfStyle()
-	//decoded := Utf8Decode(fmt.Sprintf("%v", row))
 	pdf.SetFont(s.Font, s.TableRowStyleStr, s.TableRowFontSize)
 	pdf.Cell(s.TableRowWith, s.TableRowHeight, fmt.Sprintf("%v", fmt.Sprintf("%v", row)))
 }
 
 
-func (gen *PdfGenerator) Line(pdf *fpdf.Fpdf) {
-	//s := gen.GetPdfStyle()
+func (gen *PdfGenerator) Line() {
+	pdf := gen.Fpdf
 	pdf.Line(300, 35, 35, 35)
 }
 
-func (gen *PdfGenerator) Output(pdf *fpdf.Fpdf, fileName string) {
-	//s := gen.GetPdfStyle()
+func (gen *PdfGenerator) Output(fileName string) {
+	pdf := gen.Fpdf
 	err := pdf.OutputFileAndClose(fileName)
 	if err != nil {
 		log.Fatal(err)
