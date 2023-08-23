@@ -24,7 +24,7 @@ func GenerateTablePdf() {
 	pdfGen.Fpdf.Ln(5)
 	// Footer ----------------------
 	pdfGen.Footer()
-	pdfGen.Output("files/table1.pdf")
+	pdfGen.Output("files/table.pdf")
 }
 
 func GenerateSimplePdf()  {
@@ -32,5 +32,5 @@ func GenerateSimplePdf()  {
 	pdfGen.Header()
 	pdfGen.Title("Simple PDF")
 	pdfGen.BodyCell("Simple Text")
-	pdfGen.Output("files/simple1.pdf")
+	pdfGen.Output("files/simple.pdf")
 }
