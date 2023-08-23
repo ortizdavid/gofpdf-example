@@ -11,7 +11,7 @@ import (
 
 func pdfHandler(w http.ResponseWriter, r *http.Request) {
 	pdfGen := generator.NewPdfGenerator()
-	fileName := "files/web.pdf"
+	fileName := "files/web1pdf"
 	productList := getProductList()
 
 	pdfGen.Header()
